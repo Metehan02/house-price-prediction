@@ -1,3 +1,11 @@
+## 📸 App Preview
+![alt text](<Ekran görüntüsü 2026-03-17 165849.png>)
+
+## 🌍 Live Demo
+
+https://house-price-prediction-ggqu5o7grismm5xgoq8hfu.streamlit.app/
+
+
 # 🏠 End-to-End House Price Prediction Pipeline
 
 This project builds a complete machine learning pipeline to predict house prices using the Ames Housing dataset.
