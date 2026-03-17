@@ -1,3 +1,5 @@
+import os
+import joblib
 import numpy as np
 
 from sklearn.ensemble import GradientBoostingRegressor
@@ -47,8 +49,11 @@ def main():
 
     print("\nBest Parameters:")
     print(grid_search.best_params_)
-
     print(f"\nBest CV RMSE: {best_rmse:.4f}")
+
+    os.makedirs("models", exist_ok=True)
+    joblib.dump(grid_search.best_estimator_, "models/best_model.pkl")
+    print("\nBest model saved to models/best_model.pkl")
 
 
 if __name__ == "__main__":

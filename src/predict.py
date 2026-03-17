@@ -11,10 +11,9 @@ def main():
 
     _, test_df = load_data(train_path, test_path)
 
-    model = joblib.load("models/ridge_model.pkl")
+    model = joblib.load("models/best_model.pkl")
 
     predictions = model.predict(test_df)
-
     predictions = np.expm1(predictions)
 
     submission = pd.DataFrame({

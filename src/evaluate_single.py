@@ -4,7 +4,7 @@ import pandas as pd
 
 
 def main():
-    model = joblib.load("models/ridge_model.pkl")
+    model = joblib.load("models/best_model.pkl")
     train_df = pd.read_csv("data/raw/train.csv")
 
     min_id = train_df["Id"].min()
