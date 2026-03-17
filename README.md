@@ -221,6 +221,13 @@ https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques
 
 ---
 
+## 🌍 Live Demo
+
+Try the deployed app here:
+
+https://house-price-prediction-ggqu5o7grismm5xgoq8hfu.streamlit.app/
+
+
 ## 👨‍💻 Author
 
 Metehan
