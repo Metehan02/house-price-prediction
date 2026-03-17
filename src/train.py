@@ -1,13 +1,20 @@
-import os
-import joblib
 import numpy as np
 
+from sklearn.ensemble import GradientBoostingRegressor, RandomForestRegressor
 from sklearn.linear_model import Ridge
 from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 
-from src.preprocessing import load_data, separate_target, create_preprocessor
+from src.preprocessing import create_preprocessor, load_data, separate_target
+
+
+def evaluate_model(name, model, X_train, X_valid, y_train, y_valid):
+    model.fit(X_train, y_train)
+    predictions = model.predict(X_valid)
+    rmse = np.sqrt(mean_squared_error(y_valid, predictions))
+    print(f"{name} RMSE: {rmse:.4f}")
+    return rmse
 
 
 def main():
@@ -25,21 +32,19 @@ def main():
 
     preprocessor = create_preprocessor(X)
 
-    model = Pipeline([
-        ("preprocessor", preprocessor),
-        ("regressor", Ridge())
-    ])
+    models = {
+        "Ridge": Ridge(),
+        "RandomForest": RandomForestRegressor(n_estimators=200, random_state=42),
+        "GradientBoosting": GradientBoostingRegressor(random_state=42)
+    }
 
-    model.fit(X_train, y_train)
+    for name, regressor in models.items():
+        pipeline = Pipeline([
+            ("preprocessor", preprocessor),
+            ("regressor", regressor)
+        ])
 
-    predictions = model.predict(X_valid)
-    rmse = np.sqrt(mean_squared_error(y_valid, predictions))
-
-    print(f"Validation RMSE: {rmse:.4f}")
-
-    os.makedirs("models", exist_ok=True)
-    joblib.dump(model, "models/ridge_model.pkl")
-    print("Model saved to models/ridge_model.pkl")
+        evaluate_model(name, pipeline, X_train, X_valid, y_train, y_valid)
 
 
 if __name__ == "__main__":
