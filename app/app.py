@@ -1,9 +1,14 @@
+from pathlib import Path
+
 import joblib
 import numpy as np
 import streamlit as st
 
 
-model = joblib.load("app/app_model.pkl")
+BASE_DIR = Path(__file__).resolve().parent
+MODEL_PATH = BASE_DIR / "app_model.pkl"
+
+model = joblib.load(MODEL_PATH)
 
 st.set_page_config(page_title="House Price Predictor", page_icon="🏠")
 
